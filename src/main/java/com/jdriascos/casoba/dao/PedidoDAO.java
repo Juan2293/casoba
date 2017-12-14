@@ -26,27 +26,21 @@ public class PedidoDAO implements IPedidoDAO {
 
 	@Override
 	public Pedido getPedidoById(long pedidoId) {
-
 		return entityManager.find(Pedido.class, pedidoId);
 	}
 
 	@Override
 	public void createPedido(Pedido pedido) {
-		
 		entityManager.persist(pedido);
-		
 	}
 
 	@Override
 	public void updatePedido(Pedido pedido) {
 		entityManager.merge(pedido);
-		return;
-		
 	}
 
 	@Override
 	public void deletePedido(long pedidoId) {
-
 		entityManager.remove(getPedidoById(pedidoId));
 	}	
 

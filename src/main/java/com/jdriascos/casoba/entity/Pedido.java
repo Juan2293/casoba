@@ -44,11 +44,10 @@ public class Pedido implements Serializable {
 	private boolean transporte;
 	@Column(name="valor_transporte")
 	private BigDecimal valor_transporte;
-	
-	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	
 	
 	public Cliente getCliente() {
 		return cliente;

@@ -36,10 +36,8 @@ public class ClienteDAO implements IClienteDAO {
 
 	@Override
 	public void updateCliente(Cliente cliente) {
-		
 		entityManager.merge(cliente);
     	 return;
-
 	}
 
 	@Override
@@ -49,7 +47,7 @@ public class ClienteDAO implements IClienteDAO {
 
 	@Override
 	public boolean getClienteByEmail(String correo) {
-//		
+
 //		String hql = "FROM Cliente as c WHERE c.correo = ?";
 //		int count = entityManager.createQuery(hql).setParameter(1, correo).getResultList().size();
 //		return count > 0 ? true : false;
