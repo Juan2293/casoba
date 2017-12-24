@@ -11,39 +11,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="pedido")
 public class Pedido implements Serializable {
 	
+	//entregado
+	//pago a medias
+	// 
 	
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name = "mySeqGen", sequenceName = "mySeq", initialValue = 5, allocationSize = 100)
+    @GeneratedValue(generator = "mySeqGen")
 	@Column(name="pedido_id")
 	private Long pedidoId;
 	@Column(name="num_serie")
 	private Long num_serie;
-	@Column(name="descripcion")
+	@Column(name="descripcion") //este
 	private String descripcion;
-	@Column(name="fecha_pedido")
+	@Column(name="fecha_pedido") //este
 	private Date fecha_pedido;
-	@Column(name="fecha_entrega")
+	@Column(name="fecha_entrega") //este
 	private Date fecha_entrega;
-	@Column(name="fecha_devolucion")
+	@Column(name="fecha_devolucion") //este
 	private Date fecha_devolucion;
-	@Column(name="valor")
+	@Column(name="valor")  //este
 	private BigDecimal valor;
-	@Column(name="debe_pago")
+	@Column(name="debe_pago") //este no
 	private boolean debe_pago;
-	@Column(name="fecha_pago")
+	@Column(name="fecha_pago") //este
 	private Date fecha_pago;
-	@Column(name="transporte")
+	@Column(name="transporte") //este
 	private boolean transporte;
-	@Column(name="valor_transporte")
+	@Column(name="valor_transporte") //este
 	private BigDecimal valor_transporte;
+	@Column(name="dias_alquiler")
+	private int dias_alquiler;
+	@Column(name="direccion")
+	private String direccion;
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
@@ -122,6 +131,17 @@ public class Pedido implements Serializable {
 		this.valor_transporte = valor_transporte;
 	}
 	
-	
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public int getDias_alquiler() {
+		return dias_alquiler;
+	}
+	public void setDias_alquiler(int dias_alquiler) {
+		this.dias_alquiler = dias_alquiler;
+	}
 	
 }

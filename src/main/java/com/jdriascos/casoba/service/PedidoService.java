@@ -25,21 +25,17 @@ public class PedidoService implements IPedidoService{
 	}
 
 	@Override
-	public synchronized boolean createPedido(Pedido pedido) {
-
-		pedidoDao.createPedido(pedido);
-		return true;
+	public synchronized Long createPedido(Pedido pedido) {
+		return pedidoDao.createPedido(pedido);
 	}
 
 	@Override
 	public void updatePedido(Pedido pedido) {
-
 		pedidoDao.updatePedido(pedido);
 	}
 
 	@Override
 	public void deletePedido(long pedidoId) {
-
 		pedidoDao.deletePedido(pedidoId);
 	}
 

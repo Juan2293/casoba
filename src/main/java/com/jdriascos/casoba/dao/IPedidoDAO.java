@@ -8,7 +8,7 @@ public interface IPedidoDAO {
 
 	List<Pedido> getAllPedidos();
 	Pedido getPedidoById(long pedidoId);
-	void createPedido(Pedido pedido);
+	Long createPedido(Pedido pedido);
 	void updatePedido(Pedido pedido);
 	void deletePedido(long pedidoId);
 	

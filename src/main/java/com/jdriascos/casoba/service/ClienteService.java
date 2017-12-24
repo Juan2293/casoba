@@ -16,20 +16,16 @@ public class ClienteService implements IClienteService{
 	
 	@Override
 	public List<Cliente> getAllClients() {
-
-		
 		return clienteDAO.getAllClients();
 	}
 
 	@Override
 	public Cliente getClienteById(long clienteId) {
-
 		return clienteDAO.getClienteById(clienteId);
 	}
 
 	@Override
 	public synchronized  boolean createCliente(Cliente cliente) {
-		
 //		if (clienteDAO.getClienteById(cliente.getClienteId())!=null) {
 //			return false;
 //		}else {
@@ -37,26 +33,20 @@ public class ClienteService implements IClienteService{
 			clienteDAO.createCliente(cliente);
 			return true;
 //		}	
-		
 	}
 
 	@Override
 	public void updateCliente(Cliente cliente) {
-
 		clienteDAO.updateCliente(cliente);
-		
 	}
 
 	@Override
 	public void deleteCliente(long clienteId) {
-		
 		clienteDAO.deleteCliente(clienteId);
-		
 	}
 
 	@Override
 	public boolean getClienteByEmail(String correo) {
-
 		return clienteDAO.getClienteByEmail(correo);
 	}
 

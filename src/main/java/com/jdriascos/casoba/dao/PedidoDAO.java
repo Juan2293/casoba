@@ -30,8 +30,9 @@ public class PedidoDAO implements IPedidoDAO {
 	}
 
 	@Override
-	public void createPedido(Pedido pedido) {
+	public Long createPedido(Pedido pedido) {
 		entityManager.persist(pedido);
+		return pedido.getPedidoId();
 	}
 
 	@Override

@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.jdriascos.casoba.dao.PedidoProductoDAO;
+import com.jdriascos.casoba.dto.PedidoDTO;
 import com.jdriascos.casoba.entity.Pedido;
+import com.jdriascos.casoba.entity.PedidoProducto;
+import com.jdriascos.casoba.service.IPedidoProductoService;
 import com.jdriascos.casoba.service.IPedidoService;
 
 @Controller
@@ -29,8 +33,12 @@ public class PedidoController {
 	@Autowired
 	private IPedidoService pedidoService;
 	
+	@Autowired
+	private IPedidoProductoService pedidoProductoService;
+	
 	@GetMapping("/pedidos")
 	public ResponseEntity<List<Pedido>> getAllPedidos() {
+		System.out.println("si esta aca!");
 		List<Pedido> list = pedidoService.getAllPedidos();
 		return new ResponseEntity<List<Pedido>>(list, HttpStatus.OK);
 	}
@@ -42,18 +50,21 @@ public class PedidoController {
 	}
 	
 	@PostMapping("/pedido")
-	public ResponseEntity<?> createPedido(@RequestBody Pedido pedido, UriComponentsBuilder builder) {
-
-//		boolean flag = clienteService.createCliente(cliente);
-//		System.out.println(flag);
-//		if (flag == false) {
-//			System.out.println("conflicto");
-//			 return new ResponseEntity<String>("pail",HttpStatus.CONFLICT);
-//		}
-		pedidoService.createPedido(pedido);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(builder.path("/pedido?id={id}").buildAndExpand(pedido.getPedidoId()).toUri());
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+	public ResponseEntity<?> createPedido(@RequestBody PedidoDTO pedidoDTO) {
+		
+		// se obtiene el id del pedido cuando se crea
+		Long pedidoId = pedidoService.createPedido(pedidoDTO.getPedido());
+		Pedido pedido = pedidoService.getPedidoById(pedidoId);
+		
+		PedidoProducto pedidoProductos[]=pedidoDTO.getPedidoProductos();
+		
+		//se pone el pedido en todos los pedidoProductos y se crea
+		for (PedidoProducto pedidoProducto : pedidoProductos) {
+			pedidoProducto.setPedido(pedido);
+			pedidoProductoService.createPedidoProducto(pedidoProducto);
+		}
+		
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	@PutMapping("/pedido")
 	public ResponseEntity<?> updatePedido(@RequestBody Pedido pedido) {
