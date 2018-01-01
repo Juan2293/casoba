@@ -43,6 +43,13 @@ public class PedidoDAO implements IPedidoDAO {
 	@Override
 	public void deletePedido(long pedidoId) {
 		entityManager.remove(getPedidoById(pedidoId));
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Pedido> getPedidosByClienteId(Long clienteId) {
+		String hql = "FROM Pedido p where p.cliente.clienteId = ?";
+		return (List<Pedido>)entityManager.createQuery(hql).setParameter(1, clienteId).getResultList();	
 	}	
 
 	

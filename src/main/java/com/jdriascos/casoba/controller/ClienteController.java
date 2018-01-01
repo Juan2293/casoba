@@ -37,9 +37,9 @@ public class ClienteController {
 		return new ResponseEntity<List<Cliente>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/cliente")
-	public ResponseEntity<Cliente> getClienteById(@RequestParam("id") String id) {
-		Cliente cliente = clienteService.getClienteById(Long.parseLong(id));
+	@GetMapping("/cliente/{clienteId}")
+	public ResponseEntity<Cliente> getClienteById(@PathVariable Long clienteId) {
+		Cliente cliente = clienteService.getClienteById(clienteId);
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 	

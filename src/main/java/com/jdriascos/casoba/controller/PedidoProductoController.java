@@ -1,5 +1,7 @@
 package com.jdriascos.casoba.controller;
 
+import java.util.List;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jdriascos.casoba.entity.Cliente;
 import com.jdriascos.casoba.entity.PedidoProducto;
 import com.jdriascos.casoba.service.IPedidoProductoService;
 
@@ -33,5 +37,14 @@ public class PedidoProductoController {
 			pedidoProductoService.createPedidoProducto(pedidoProducto);
 			return new ResponseEntity<PedidoProducto>(HttpStatus.CREATED);
 	}
+	
+	
+	@GetMapping("/pedido-producto/{pedidoId}")
+	public ResponseEntity<List<PedidoProducto>> getPedidoProductoByPedidoId(@PathVariable Long pedidoId) {
+		System.out.println("entro!");
+		List<PedidoProducto> pedidoProducto = pedidoProductoService.getPedidoProductoByPedidoId(pedidoId);
+		return new ResponseEntity<List<PedidoProducto>>(pedidoProducto, HttpStatus.OK);
+	}
+			
 	
 }

@@ -39,4 +39,9 @@ public class PedidoService implements IPedidoService{
 		pedidoDao.deletePedido(pedidoId);
 	}
 
+	@Override
+	public List<Pedido> getPedidosByClienteId(Long clienteId) {
+		return pedidoDao.getPedidosByClienteId(clienteId);
+	}
+
 }

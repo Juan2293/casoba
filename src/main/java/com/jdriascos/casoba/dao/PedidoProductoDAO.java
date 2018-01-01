@@ -27,7 +27,7 @@ public class PedidoProductoDAO implements IPedidoProductoDAO{
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<PedidoProducto> getPedidoProductoByPedidoId(Long pedidoId) {
-		String hql = "FROM PedidoProducto as pp WHERE pp.pedidoId = ?";
+		String hql = "FROM PedidoProducto p WHERE p.pedido.pedidoId = ?";
 		return (List<PedidoProducto>)entityManager.createQuery(hql).setParameter(1, pedidoId).getResultList();
 	}
 	@Override

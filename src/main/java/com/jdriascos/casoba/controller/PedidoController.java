@@ -38,7 +38,6 @@ public class PedidoController {
 	
 	@GetMapping("/pedidos")
 	public ResponseEntity<List<Pedido>> getAllPedidos() {
-		System.out.println("si esta aca!");
 		List<Pedido> list = pedidoService.getAllPedidos();
 		return new ResponseEntity<List<Pedido>>(list, HttpStatus.OK);
 	}
@@ -76,6 +75,12 @@ public class PedidoController {
 	public ResponseEntity<?> deletePedido(@PathVariable Long pedidoId){
 		pedidoService.deletePedido(new Long(pedidoId));
 		return new ResponseEntity<Pedido>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/pedidos/{clienteId}")
+	public ResponseEntity<List<Pedido>> getPedidosByClienteId(@PathVariable Long clienteId) {
+		List<Pedido> list = pedidoService.getPedidosByClienteId(clienteId);
+		return new ResponseEntity<List<Pedido>>(list, HttpStatus.OK);
 	}
 	
 }
